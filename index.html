@@ -1,0 +1,1435 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>王雪磊 · 摄影作品集</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Inter+Tight:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* ─── Apple Design System — complete token set ─── */
+      --bg: #ffffff;
+      --surface: #f5f5f7;
+      --surface-warm: #fbfbfd;
+      --fg: #1d1d1f;
+      --fg-2: #424245;
+      --muted: #6e6e73;
+      --meta: #86868b;
+      --border: #d2d2d7;
+      --border-soft: #e8e8ed;
+      --accent: #0071e3;
+      --accent-on: #ffffff;
+      --accent-hover: #0077ed;
+      --accent-active: #0066cc;
+      --success: #16a34a;
+      --warn: #eab308;
+      --danger: #dc2626;
+
+      /* backward compatibility aliases */
+      --text: var(--fg);
+      --stroke: var(--border);
+
+      /* Typography */
+      --font-display: 'Inter Tight', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-body: 'Inter', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-mono: 'SF Mono', ui-monospace, 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 17px;
+      --text-lg: 21px;
+      --text-xl: 28px;
+      --text-2xl: 40px;
+      --text-3xl: 56px;
+      --text-4xl: 80px;
+      --leading-body: 1.47;
+      --leading-tight: 1.05;
+      --tracking-display: -0.015em;
+
+      /* Spacing */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --section-y-desktop: 100px;
+      --section-y-tablet: 64px;
+      --section-y-phone: 40px;
+
+      /* Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-pill: 980px;
+
+      /* Elevation */
+      --elev-flat: none;
+      --elev-ring: 0 0 0 1px var(--border);
+      --elev-raised: 0 12px 32px rgba(0, 0, 0, 0.08);
+      --focus-ring: 0 0 0 4px color-mix(in oklab, var(--accent), transparent 65%);
+
+      /* Motion */
+      --motion-fast: 150ms;
+      --motion-base: 220ms;
+      --ease-standard: cubic-bezier(0.28, 0, 0.22, 1);
+
+      /* Layout */
+      --container-max: 1024px;
+      --container-gutter-desktop: 22px;
+      --container-gutter-tablet: 18px;
+      --container-gutter-phone: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img, video { display: block; }
+    button, a { font: inherit; color: inherit; cursor: pointer; text-decoration: none; }
+
+    .font-display { font-family: 'Inter Tight', sans-serif; }
+    .muted { color: var(--muted); }
+    .eyebrow { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3em; }
+    .container { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+
+    .accent-gradient { background: #0071e3; }
+
+    @keyframes scroll-down { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
+    @keyframes role-fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ───── LOADING SCREEN ───── */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999; background: #000;
+      transition: opacity 0.6s ease;
+    }
+    #loader.done { opacity: 0; pointer-events: none; }
+    .loader-words {
+      position: absolute; inset: 0; display: grid; place-items: center;
+    }
+    .loader-words span {
+      grid-area: 1 / 1;
+      font-size: clamp(4.5rem, 14vw, 10rem);
+      font-family: Georgia, 'Songti SC', 'Noto Serif CJK SC', serif;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75); opacity: 0;
+    }
+    .loader-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,0.1); }
+    .loader-bar > div {
+      height: 100%; transform-origin: left; transform: scaleX(0);
+      box-shadow: 0 0 8px rgba(0,113,227,0.35);
+    }
+
+    /* ───── HERO ───── */
+    .hero {
+      position: relative; min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; overflow: hidden;
+      background: #000;
+    }
+    /* Blurred photo background */
+    .hero-bg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0; opacity: 0.85;
+      filter: blur(40px) saturate(1.2);
+      transition: opacity 0.7s var(--ease-standard);
+      transform: scale(1.15);
+      opacity: 0.85;
+    }
+    .hero .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.08); z-index: 1; }
+    .hero .bottom-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 240px; background: linear-gradient(to top, #000, transparent); z-index: 1; }
+
+    /* ─── Hero dark theme: text overrides for #000 background ─── */
+    .hero .hero-name { color: #fff; }
+    .hero .hero-role { color: rgba(255,255,255,0.85); }
+    .hero .hero-desc { color: rgba(255,255,255,0.55); }
+    .hero .hero-eyebrow { color: rgba(255,255,255,0.45); }
+    .hero .btn-solid { background: var(--accent); color: var(--accent-on); }
+    .hero .btn-solid:hover { background: var(--accent-hover); }
+    .hero .btn-outline { border-color: rgba(255,255,255,0.25); color: #fff; }
+    .hero .btn-outline:hover { border-color: rgba(255,255,255,0.5); }
+    .hero .scroll-ind .lbl { color: rgba(255,255,255,0.45); }
+    .hero .scroll-ind .track { background: rgba(255,255,255,0.15); }
+    .hero .scroll-ind .track > i { background: #fff; }
+
+    /* ─── Navbar ─── */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; justify-content: center; padding: 24px 16px; }
+    .nav-pill {
+      display: inline-flex; align-items: center; gap: 2px; border-radius: 999px;
+      position: relative; padding: 8px;
+      /* Liquid glass core */
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      /* Multi-layer border for glass depth */
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        0 2px 12px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(0, 0, 0, 0.12);
+      transition:
+        background 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.3s ease,
+        backdrop-filter 0.4s ease;
+    }
+    /* Subtle liquid shimmer overlay */
+    .nav-pill::after {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 999px; pointer-events: none;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(255, 255, 255, 0.04) 100%
+      );
+      transition: opacity 0.4s ease;
+    }
+    .nav-pill.scrolled {
+      background: rgba(255, 255, 255, 0.20);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    .nav-pill.scrolled::after {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.18) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(255, 255, 255, 0.06) 100%
+      );
+    }
+    .logo {
+      position: relative; width: 36px; height: 36px; border-radius: 50%;
+      display: grid; place-items: center; transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+    .logo::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%; padding: 2px;
+      background: #0071e3;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; transition: transform 0.5s ease;
+      z-index: 2;
+    }
+    .logo:hover { transform: scale(1.1); }
+    .logo:hover::before { transform: rotate(180deg); }
+    .logo span {
+      position: relative; z-index: 1; width: 30px; height: 30px; border-radius: 50%;
+      background: var(--bg); display: grid; place-items: center; font-size: 13px;
+      transition: opacity 0.4s ease;
+    }
+    .logo .nav-avatar-img {
+      position: absolute; inset: 2px; z-index: 1; width: calc(100% - 4px); height: calc(100% - 4px);
+      border-radius: 50%; object-fit: cover;
+    }
+    .nav-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); margin: 0 4px; transition: background 0.3s ease; }
+    .nav-pill.scrolled .nav-divider { background: rgba(0,0,0,0.10); }
+    .nav-link, .say-hi {
+      font-size: 0.85rem; border-radius: 999px; padding: 8px 16px; transition: all 0.3s ease;
+    }
+    .nav-link.active { color: #fff; background: rgba(255,255,255,0.15); box-shadow: 0 1px 2px rgba(0,0,0,0.10); }
+    .nav-link:not(.active) { color: rgba(255,255,255,0.65); }
+    .nav-link:not(.active):hover { color: #fff; background: rgba(255,255,255,0.10); }
+    .nav-link:focus-visible, .say-hi:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.5); }
+    .nav-pill.scrolled .nav-link.active { color: var(--fg); background: rgba(0,0,0,0.06); box-shadow: none; }
+    .nav-pill.scrolled .nav-link:not(.active) { color: var(--muted); }
+    .nav-pill.scrolled .nav-link:not(.active):hover { color: var(--fg); background: rgba(0,0,0,0.04); }
+    .nav-pill.scrolled .nav-link:focus-visible, .nav-pill.scrolled .say-hi:focus-visible { box-shadow: 0 0 0 2px var(--accent); }
+    .say-hi { position: relative; display: inline-flex; align-items: center; gap: 4px; }
+    .say-hi .ring {
+      position: absolute; inset: -2px; border-radius: 999px; opacity: 0;
+      background: #0071e3; transition: opacity 0.3s ease;
+    }
+    .say-hi:hover .ring { opacity: 1; }
+    .say-hi .inner {
+      position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-radius: 999px; padding: 8px 16px; color: rgba(255,255,255,0.85);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .nav-pill.scrolled .say-hi .inner { background: var(--surface); color: var(--fg); }
+
+    /* ─── Hero Avatar + Content ─── */
+    .hero-avatar-section {
+      position: relative; z-index: 10; display: flex; flex-direction: column;
+      align-items: center; text-align: center; padding: 0 24px;
+    }
+    .hero-avatar-wrap {
+      position: relative; width: clamp(140px, 22vw, 220px); height: clamp(140px, 22vw, 220px);
+      border-radius: 50%; overflow: hidden; margin-bottom: 24px;
+      border: 3px solid rgba(255,255,255,0.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    }
+    .hero-avatar-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-avatar-wrap .ring-accent {
+      position: absolute; inset: -4px; border-radius: 50%; z-index: -1;
+      background: #0071e3;
+    }
+    .hero-eyebrow { display: block; margin-bottom: 16px; opacity: 0.8; }
+    .hero-name {
+      font-size: clamp(2.5rem, 8vw, 5rem); line-height: 0.9; letter-spacing: -0.02em;
+      margin-bottom: 16px; position: relative; z-index: 10;
+    }
+    .hero-role { font-size: clamp(1rem, 2vw, 1.4rem); margin-bottom: 8px; position: relative; z-index: 10; }
+    .hero-role .role-word { display: inline-block; animation: role-fade-in 0.4s ease-out; }
+    .hero-desc { font-size: 0.9rem; max-width: 26rem; margin: 12px auto 40px; line-height: 1.6; color: var(--muted); position: relative; z-index: 10; }
+    .cta-row { display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 10; }
+    .btn { position: relative; border-radius: 999px; font-size: 0.9rem; padding: 14px 28px; transition: transform 0.3s var(--ease-standard), background 0.2s var(--ease-standard), border-color 0.2s var(--ease-standard); }
+    .btn:hover { transform: scale(1.05); }
+    .btn:focus-visible { box-shadow: var(--focus-ring); outline: none; }
+    .btn-solid { background: var(--fg); color: var(--bg); }
+    .btn-solid:hover { background: #333; }
+    .btn-outline { border: 2px solid var(--border); background: transparent; color: var(--fg); }
+    .btn-outline:hover { border-color: var(--muted); }
+
+    .scroll-ind { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 10; text-align: center; }
+    .scroll-ind .lbl { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 12px; }
+    .scroll-ind .track { width: 1px; height: 40px; background: var(--stroke); margin: 0 auto; overflow: hidden; position: relative; }
+    .scroll-ind .track > i { display: block; width: 1px; height: 100%; background: var(--text); animation: scroll-down 1.5s ease-in-out infinite; }
+
+    /* ───── REVEAL (whileInView, staggered) ───── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--ease-standard), transform 0.7s var(--ease-standard); transition-delay: calc(var(--i, 0) * 0.1s); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ───── SECTION HEADER ───── */
+    .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 48px; flex-wrap: wrap; }
+    .sec-head .line { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .sec-head .line .bar { width: 32px; height: 1px; background: var(--stroke); }
+    .sec-head h2 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; letter-spacing: -0.02em; }
+    .sec-head p { color: var(--muted); font-size: 0.95rem; max-width: 30rem; margin-top: 16px; }
+    .view-all {
+      position: relative; display: inline-flex; align-items: center; gap: 6px;
+      border-radius: 999px; padding: 10px 18px; font-size: 0.85rem; border: 1px solid var(--stroke);
+    }
+    .view-all .ring { position: absolute; inset: -1px; border-radius: 999px; opacity: 0; background: #0071e3; transition: opacity 0.3s; z-index: 0; }
+    .view-all:hover .ring { opacity: 1; }
+    .view-all:focus-visible, .dribbble-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    .view-all .inner { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; background: var(--bg); border-radius: 999px; padding: 0 2px; }
+
+    /* ───── WORKS BENTO ───── */
+    .works { padding: var(--section-y-desktop) 0; }
+    .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+    .proj { position: relative; grid-column: span 12; border: none; background: var(--surface); border-radius: 16px; overflow: hidden; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: box-shadow 0.4s var(--ease-standard), transform 0.4s var(--ease-standard); }
+    .proj:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.08); transform: translateY(-3px); }
+    .proj-img { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-standard), opacity 0.6s ease; }
+    .proj:hover .proj-img img { transform: scale(1.06); }
+    /* Bottom gradient label (replaces full overlay) */
+    .proj .proj-label {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 20px 18px 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.35s var(--ease-standard), transform 0.35s var(--ease-standard);
+    }
+    .proj:hover .proj-label { opacity: 1; transform: translateY(0); }
+    .proj-label .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+    }
+    .proj-label .txt {
+      font-size: 0.82rem; font-weight: 500; color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .proj-label .cat {
+      font-size: 0.72rem; font-weight: 400; color: rgba(255,255,255,0.7);
+      margin-left: auto; letter-spacing: 0.02em;
+    }
+    /* Remove old hover-layer */
+    .proj .hover-layer, .proj:hover .hover-layer { display: none; }
+
+    /* ───── JOURNAL ───── */
+    .journal { padding: var(--section-y-desktop) 0; }
+    .entries { display: flex; flex-direction: column; gap: 16px; }
+    .entry {
+      display: flex; align-items: center; gap: 24px; padding: 16px;
+      background: rgba(245,245,247,0.3); border: 1px solid var(--stroke);
+      border-radius: 40px; transition: background 0.25s var(--ease-standard), box-shadow 0.25s var(--ease-standard);
+      cursor: pointer;
+    }
+    .entry:hover { background: var(--surface); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .entry img { width: 72px; height: 72px; border-radius: 24px; object-fit: cover; flex: 0 0 auto; transition: opacity 0.5s ease, transform 0.5s ease; }
+    .entry .body { flex: 1; min-width: 0; }
+    .entry .body h3 { font-size: 1.15rem; font-weight: 500; letter-spacing: -0.01em; }
+    .entry .meta { display: flex; gap: 16px; color: var(--muted); font-size: 0.8rem; margin-top: 6px; }
+    .entry .date { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
+
+    /* ───── EXPLORATIONS ───── */
+    .explore { position: relative; min-height: 300vh; }
+    .explore-pin {
+      position: sticky; top: 0; height: 100vh; display: grid; place-items: center;
+      text-align: center; z-index: 10; pointer-events: none;
+    }
+    .explore-pin .inner { pointer-events: auto; }
+    .explore-pin h2 { font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; margin: 16px 0; }
+    .dribbble-btn {
+      display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--stroke);
+      border-radius: 999px; padding: 12px 22px; font-size: 0.9rem; margin-top: 16px;
+    }
+    .parallax-cols {
+      position: absolute; inset: 0; z-index: 20; display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; max-width: 1400px; margin: 0 auto; padding: 0 32px; pointer-events: none;
+    }
+    .pcol { display: flex; flex-direction: column; gap: 80px; padding-top: 30vh; }
+    .pcol:nth-child(2) { padding-top: 55vh; }
+    .pcard {
+      aspect-ratio: 1; max-width: 320px; width: 100%; border-radius: 20px; overflow: hidden;
+      border: 1px solid var(--stroke); pointer-events: auto; cursor: pointer; will-change: transform;
+    }
+    .pcard img { width: 100%; height: 100%; object-fit: cover; }
+    .pcol:nth-child(2) .pcard { margin-left: auto; }
+
+    /* ───── LIGHTBOX ───── */
+    #lightbox { position: fixed; inset: 0; z-index: 9000; background: rgba(0,0,0,0.92); display: none; place-items: center; padding: 40px; }
+    #lightbox.open { display: grid; }
+    #lightbox img { max-width: 80vw; max-height: 80vh; border-radius: 12px; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+
+    /* ───── RESPONSIVE ───── */
+    @media (min-width: 768px) {
+      .proj { grid-column: span 6; aspect-ratio: 4/3; }
+    }
+    @media (max-width: 767px) {
+      .proj { aspect-ratio: 4/3; }
+      .parallax-cols { gap: 20px; padding: 0 16px; }
+      .entry { border-radius: 28px; }
+      .nav-pill { gap: 0; padding: 6px; }
+      .nav-link, .say-hi { font-size: 0.78rem; padding: 6px 10px; }
+      .logo { width: 30px; height: 30px; }
+      .logo span { width: 24px; height: 24px; font-size: 11px; }
+      .nav-pill .say-hi .inner { padding: 6px 10px; font-size: 0.78rem; }
+      .contact-card { padding: 40px 24px; }
+      .contact-email { font-size: 1.15rem; }
+    }
+
+    /* ───── ACCESSIBILITY: REDUCED MOTION ───── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
+      .btn:hover { transform: none; }
+      .proj:hover .proj-img img { transform: none; }
+      .scroll-ind .track > i { animation: none; }
+      .gallery-item:hover, .gallery-item:hover img { transform: none; }
+      .gallery-item .caption { opacity: 0; }
+      #gallery { opacity: 1; transition: none; transform: translateY(0); }
+      #waterfall { opacity: 1; transition: none; transform: translate(-50%, -50%) scale(1); }
+      .proj:hover { transform: none; }
+      .proj .proj-label { opacity: 0; display: none; }
+      .gallery-item:hover { transform: none; }
+      .gallery-item:hover img { transform: none; }
+      .gallery-item .caption { display: none; }
+      .wf-masonry .wf-item:hover { opacity: 1; }
+    }
+
+    /* ───── CONTACT SECTION ───── */
+    .contact-card {
+      background: var(--surface); border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg); padding: 60px 40px; text-align: center;
+    }
+    .contact-inner { max-width: 400px; margin: 0 auto; }
+    .contact-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 12px; }
+    .contact-email { font-size: 1.5rem; color: var(--fg); font-weight: 500; text-decoration: none; transition: color 0.2s var(--ease-standard); }
+    .contact-email:hover { color: var(--accent); }
+    .contact-note { font-size: 0.85rem; color: var(--meta); margin-top: 20px; }
+
+    /* ───── GALLERY BACKDROP ───── */
+    #galleryBackdrop {
+      position: fixed; inset: 0; z-index: 7999;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: none; opacity: 0;
+      transition: opacity 0.35s var(--ease-standard);
+    }
+    #galleryBackdrop.open { display: block; opacity: 1; }
+
+    /* ───── GALLERY OVERLAY — 底部上滑面板 ───── */
+    #gallery {
+      position: fixed; z-index: 8000; background: var(--bg);
+      overflow-y: auto; display: none; -webkit-overflow-scrolling: touch;
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-standard), transform 0.35s var(--ease-standard);
+      transform: translateY(30px);
+      left: 0; right: 0; bottom: 0;
+      top: 48px;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.12);
+    }
+    #gallery.open { display: block; opacity: 1; transform: translateY(0); }
+    @media (min-width: 1024px) {
+      #gallery {
+        left: 50%; transform: translateX(-50%) translateY(30px);
+        width: min(60vw, 960px);
+      }
+      #gallery.open { transform: translateX(-50%) translateY(0); }
+    }
+    .gallery-header {
+      position: sticky; top: 0; z-index: 10; display: flex; align-items: center;
+      justify-content: space-between; padding: 12px 16px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .gallery-close {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: none; background: var(--surface);
+      font-size: 1.1rem; color: var(--fg); cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .gallery-close:hover { background: var(--border-soft); }
+    .gallery-close:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    .gallery-header .gallery-tabs {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: inline-flex; align-items: center; gap: 2px;
+      background: var(--surface); border-radius: var(--radius-pill);
+      padding: 2px;
+    }
+    .gallery-tab {
+      border: none; background: none;
+      font-size: 0.78rem; font-weight: 500; color: var(--muted);
+      cursor: pointer; padding: 5px 12px; border-radius: 999px;
+      transition: all 0.2s ease; white-space: nowrap;
+    }
+    .gallery-tab:hover { color: var(--fg); }
+    .gallery-tab.active {
+      background: #fff; color: var(--fg);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .gallery-tab:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+    /* ─── Article view (A4 paper style) ─── */
+    .article-view {
+      display: none; max-width: 720px; margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+    .article-view.show { display: block; }
+    .article-view .a-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700; line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+    .article-view .a-meta {
+      font-size: 0.82rem; color: var(--meta);
+      margin-bottom: 32px; display: flex; gap: 16px;
+    }
+    .article-view .a-image {
+      width: 100%; border-radius: var(--radius-md);
+      margin-bottom: 28px; aspect-ratio: 16 / 9;
+      object-fit: cover; background: var(--surface);
+      border: 1px solid var(--border-soft);
+    }
+    .article-view .a-body {
+      font-size: 1rem; line-height: 1.75;
+      color: var(--fg); max-width: 640px;
+    }
+    .article-view .a-body p {
+      margin-bottom: 1.2em;
+      text-indent: 2em;
+    }
+    .article-view .a-placeholder {
+      color: var(--muted); font-size: 0.85rem;
+      text-align: center; padding: 40px 0;
+      border: 2px dashed var(--border-soft);
+      border-radius: var(--radius-md);
+    }
+    .gallery-masonry {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+      max-width: 1520px; margin: 0 auto; padding: 20px 24px 48px;
+    }
+    .gallery-item {
+      border-radius: var(--radius-md); overflow: hidden;
+      border: 1px solid var(--border-soft);
+      transition: transform 0.4s var(--ease-standard);
+      cursor: pointer; background: var(--surface);
+      aspect-ratio: 4 / 3; position: relative;
+    }
+    .gallery-item:hover { transform: scale(1.03); }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s var(--ease-standard);
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-item .caption {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+      opacity: 0; transition: opacity 0.3s var(--ease-standard);
+      color: #fff; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em;
+      padding: 16px; align-content: end; text-align: center;
+    }
+    .gallery-item:hover .caption { opacity: 1; }
+    .gallery-item .caption span {
+      display: block; margin-top: 4px; font-size: 0.75rem; font-weight: 400; opacity: 0.7;
+    }
+    /* image error fallback */
+    .gallery-item img[data-error] { display: none; }
+    .gallery-item .img-fallback {
+      display: none; width: 100%; height: 100%; place-items: center;
+      background: var(--surface); color: var(--meta); font-size: 0.8rem;
+    }
+    .gallery-item .img-fallback.show { display: grid; }
+    @media (max-width: 900px) { .gallery-masonry { grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 640px; } }
+    @media (max-width: 500px) { .gallery-masonry { grid-template-columns: 1fr; gap: 14px; } }
+    @media (max-width: 640px) {
+      #gallery { top: 0; border-radius: 0; }
+      .gallery-masonry { padding: 12px 14px 32px; gap: 8px; }
+      .gallery-header { padding: 10px 12px; }
+      .gallery-close { width: 32px; height: 32px; font-size: 1rem; }
+      .gallery-header .gallery-tabs { gap: 1px; }
+      .gallery-tab { font-size: 0.72rem; padding: 4px 10px; }
+    }
+
+    /* ───── WATERFALL OVERLAY — 全品类照片瀑布流 ───── */
+    #waterfall {
+      position: fixed; z-index: 8000; background: var(--bg);
+      overflow-y: auto; display: none; -webkit-overflow-scrolling: touch;
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-standard), transform 0.3s var(--ease-standard);
+      transform: translate(-50%, -50%) scale(0.96);
+      left: 50%; top: 50%;
+      width: min(98vw, 1800px);
+      height: min(96vh, 98%);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+    }
+    #waterfall.open { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .wf-header {
+      position: sticky; top: 0; z-index: 10; display: flex; align-items: center;
+      justify-content: space-between; padding: 14px 24px;
+      background: rgba(255,255,255,0.88); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .wf-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: none; background: none; font-size: 0.88rem; font-weight: 500; color: var(--accent);
+      cursor: pointer; padding: 8px 14px; border-radius: var(--radius-pill);
+      transition: background 0.2s ease;
+    }
+    .wf-back:hover { background: rgba(0,113,227,0.08); }
+    .wf-back:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    .wf-header h2 { font-size: 1.05rem; font-weight: 600; color: var(--fg); letter-spacing: -0.01em; }
+
+    .wf-masonry {
+      column-count: 4; column-gap: 0;
+      padding: 0;
+    }
+    .wf-masonry .wf-item {
+      break-inside: avoid; display: block; overflow: hidden;
+      line-height: 0;
+      transition: opacity 0.4s var(--ease-standard);
+      cursor: pointer;
+    }
+    .wf-masonry .wf-item:hover { opacity: 0.88; }
+    .wf-masonry .wf-item img {
+      width: 100%; display: block;
+      object-fit: cover;
+    }
+    @media (max-width: 1200px) { .wf-masonry { column-count: 3; } }
+    @media (max-width: 900px)  { .wf-masonry { column-count: 2; } }
+    @media (max-width: 500px)  { .wf-masonry { column-count: 1; } }
+    @media (max-width: 640px) {
+      #waterfall { width: 98vw; height: 96vh; border-radius: var(--radius-md); }
+    }
+  </style>
+</head>
+<body>
+  <!-- ───── LOADING SCREEN ───── -->
+  <div id="loader">
+    <div class="loader-words font-display">
+      <span data-w="0">光影</span>
+      <span data-w="1">瞬间</span>
+      <span data-w="2">故事</span>
+      <span data-w="3">人物</span>
+    </div>
+    <div class="loader-bar"><div class="accent-gradient" id="loadbar"></div></div>
+  </div>
+
+  <!-- ───── HERO ───── -->
+  <section class="hero" id="home">
+    <!-- Blurred photo background -->
+    <img class="hero-bg" id="heroBg" src="mqhe7gml-IMG_7096.JPEG" alt="">
+    <div class="overlay"></div>
+    <div class="bottom-fade"></div>
+
+    <nav class="navbar">
+      <div class="nav-pill" id="navPill">
+        <a class="logo" id="navLogo" href="#home">
+          <span class="font-display">雪</span>
+          <img class="nav-avatar-img" id="navAvatarImg" src="mqjf9vhi-0054879da6e9dfb0b76b703cf6834954.jpg" alt="">
+        </a>
+        <span class="nav-divider"></span>
+        <a class="nav-link active" href="#home">首页</a>
+        <a class="nav-link" href="#work">作品</a>
+        <a class="nav-link" href="#about">关于</a>
+        <span class="nav-divider"></span>
+        <a class="say-hi" href="#contact"><span class="ring"></span><span class="inner">联系</span></a>
+      </div>
+    </nav>
+
+    <div class="hero-avatar-section" style="margin-top: 0px;">
+      <div class="hero-avatar-wrap" id="avatarWrap">
+        <div class="ring-accent"></div>
+        <img id="heroAvatarImg" src="mqjf9vhi-0054879da6e9dfb0b76b703cf6834954.jpg" alt="王雪磊">
+      </div>
+      <span class="hero-eyebrow eyebrow" style="font-size: 16.52px; letter-spacing: 4.456px;">作品集</span>
+      <h1 class="hero-name font-display">徐乃康</h1>
+      <p class="hero-role">以镜头 <span class="font-display role-word" id="role" style="font-size: 22.4px; font-weight: 400;">纪实</span> 记录世间万象</p>
+      <p class="hero-desc">每一帧都是对世界的凝视。<br>——用相机讲述那些无法言说的故事。</p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="#work">欣赏作品</a>
+        <a class="btn btn-outline" href="#contact">与我联系</a>
+      </div>
+    </div>
+
+    <div class="scroll-ind">
+      <div class="track"><i></i></div>
+    </div>
+  </section>
+
+  <!-- ───── SELECTED WORKS ───── -->
+  <section class="works" id="work">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div>
+          <span class="line"><i class="bar"></i><span class="eyebrow">精选作品</span></span>
+          <h2>代表 <span class="font-display">作品</span></h2>
+          <p>从概念到成片，每一组作品都承载着独特的故事与视角。</p>
+        </div>
+        <a class="view-all" href="#work"><span class="ring"></span><span class="inner">查看全部 →</span></a>
+      </div>
+      <div class="bento" id="bentoGrid">
+        <div class="proj reveal">
+          <div class="proj-img"><img data-img="p1" alt="光影律动"></div>
+          <div class="proj-label"><span class="dot"></span><span class="txt">光影律动</span><span class="cat">Light &amp; Shadow</span></div>
+        </div>
+        <div class="proj reveal">
+          <div class="proj-img"><img data-img="p2" alt="城市几何"></div>
+          <div class="proj-label"><span class="dot"></span><span class="txt">城市几何</span><span class="cat">Urban Geometry</span></div>
+        </div>
+        <div class="proj reveal">
+          <div class="proj-img"><img data-img="p3" alt="人像叙事"></div>
+          <div class="proj-label"><span class="dot"></span><span class="txt">人像叙事</span><span class="cat">Portrait</span></div>
+        </div>
+        <div class="proj reveal">
+          <div class="proj-img"><img data-img="p4" alt="商业静物"></div>
+          <div class="proj-label"><span class="dot"></span><span class="txt">商业静物</span><span class="cat">Still Life</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── ABOUT / JOURNAL ───── -->
+  <section class="journal" id="about">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div>
+          <span class="line"><i class="bar"></i><span class="eyebrow">关于</span></span>
+          <h2>镜头背后 <span class="font-display">的故事</span></h2>
+          <p>关于摄影、创作与那些触动心弦的瞬间。</p>
+        </div>
+        <a class="view-all" href="#about"><span class="ring"></span><span class="inner">了解更多 →</span></a>
+      </div>
+      <div class="entries reveal">
+        <div class="entry"><img data-img="j1" alt=""><div class="body"><h3>在西藏拍摄星空：一次与银河的对话</h3><div class="meta"><span>8 分钟阅读</span></div></div><span class="date">2026.03</span></div>
+        <div class="entry"><img data-img="j2" alt=""><div class="body"><h3>纪实摄影的力量：捕捉真实的城市脉搏</h3><div class="meta"><span>6 分钟阅读</span></div></div><span class="date">2026.02</span></div>
+        <div class="entry"><img data-img="j3" alt=""><div class="body"><h3>如何用自然光打造电影感人像</h3><div class="meta"><span>5 分钟阅读</span></div></div><span class="date">2026.01</span></div>
+        <div class="entry"><img data-img="j4" alt=""><div class="body"><h3>从胶片到数码：我的摄影之路</h3><div class="meta"><span>10 分钟阅读</span></div></div><span class="date">2025.12</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── EXPLORATIONS ───── -->
+  <section class="explore">
+    <div class="explore-pin">
+      <div class="inner container">
+        <span class="eyebrow">探索</span>
+        <h2 class="font-display">视觉实验</h2>
+        <p class="muted" style="max-width:26rem;margin:0 auto;">一些未完成的尝试、实验性的构图和灵感的碎片。</p>
+        <a class="dribbble-btn" href="#">探索更多 ↗</a>
+      </div>
+    </div>
+    <div class="parallax-cols">
+      <div class="pcol">
+        <div class="pcard" style="transform:rotate(-3deg)"><img data-img="e1" alt=""></div>
+        <div class="pcard" style="transform:rotate(2deg)"><img data-img="e2" alt=""></div>
+        <div class="pcard" style="transform:rotate(-1deg)"><img data-img="e3" alt=""></div>
+      </div>
+      <div class="pcol">
+        <div class="pcard" style="transform:rotate(2deg)"><img data-img="e4" alt=""></div>
+        <div class="pcard" style="transform:rotate(-2deg)"><img data-img="e5" alt=""></div>
+        <div class="pcard" style="transform:rotate(3deg)"><img data-img="e6" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── CONTACT ───── -->
+  <section class="journal" id="contact" style="padding-bottom:0;">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div>
+          <span class="line"><i class="bar"></i><span class="eyebrow">联系</span></span>
+          <h2>保持 <span class="font-display">联系</span></h2>
+          <p>无论是商业合作还是创作交流，欢迎随时与我联系。</p>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-inner">
+          <p class="contact-label">邮箱</p>
+          <a href="mailto:wangxuelei@example.com" class="contact-email">213155726@qq.com</a>
+          <p class="contact-note">我会在 24 小时内回复</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── LIGHTBOX ───── -->
+  <div id="lightbox" role="dialog" aria-label="图片预览" aria-modal="true">
+    <button id="lightboxClose" aria-label="关闭预览" style="position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:none;background:rgba(0,0,0,0.4);color:#fff;font-size:1.2rem;cursor:pointer;z-index:10;display:grid;place-items:center">✕</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <!-- ───── GALLERY BACKDROP ───── -->
+  <div id="galleryBackdrop"></div>
+
+  <!-- ───── WATERFALL OVERLAY — 全品类瀑布流 ───── -->
+  <div id="waterfall" role="dialog" aria-label="全部作品" aria-modal="true">
+    <div class="wf-header">
+      <button class="wf-back" id="wfBack" aria-label="返回主页面">← 返回</button>
+      <h2 class="font-display">全部作品</h2>
+      <span></span>
+    </div>
+    <div class="wf-masonry" id="wfGrid"></div>
+  </div>
+
+  <!-- ───── GALLERY OVERLAY — 底部上滑面板 ───── -->
+  <div id="gallery" role="dialog" aria-label="全部作品" aria-modal="true">
+    <div class="gallery-header">
+      <button class="gallery-close" id="galleryClose" aria-label="关闭">✕</button>
+      <div class="gallery-tabs">
+        <button class="gallery-tab active" data-view="grid">照片</button>
+        <button class="gallery-tab" data-view="article">文章</button>
+      </div>
+      <span style="width:36px"></span>
+      <span id="galleryTitle" style="display:none"></span>
+    </div>
+    <div class="gallery-masonry" id="galleryGrid"></div>
+    <div class="article-view" id="articleView"></div>
+  </div>
+
+  <script>
+    // ── Inline placeholder images (data URIs) ──
+    var IMGS = window.__PC_IMGS__ || {};
+    document.querySelectorAll('img[data-img]').forEach(function (el) {
+      var key = el.getAttribute('data-img');
+      if (IMGS[key]) el.src = IMGS[key];
+    });
+
+    // ── Loading screen: rAF counter 000 -> 100 over 2700ms ──
+    (function () {
+      var loader = document.getElementById('loader');
+      var bar = document.getElementById('loadbar');
+      var words = document.querySelectorAll('.loader-words span');
+      var start = null;
+      var DUR = 2700;
+      var wi = 0;
+      function showWord(i) {
+        words.forEach(function (w, idx) { w.style.opacity = idx === i ? '1' : '0'; w.style.transform = idx === i ? 'translateY(0)' : 'translateY(20px)'; });
+      }
+      words.forEach(function (w) { w.style.transition = 'opacity 0.4s ease, transform 0.4s ease'; });
+      showWord(0);
+      var wordTimer = setInterval(function () { wi = (wi + 1) % words.length; showWord(wi); }, 900);
+      function frame(t) {
+        if (start === null) start = t;
+        var p = Math.min((t - start) / DUR, 1);
+        bar.style.transform = 'scaleX(' + p + ')';
+        if (p < 1) { requestAnimationFrame(frame); }
+        else {
+          clearInterval(wordTimer);
+          setTimeout(function () { loader.classList.add('done'); }, 400);
+        }
+      }
+      requestAnimationFrame(frame);
+    })();
+
+    // ── Hero role cycling every 2s ──
+    (function () {
+      var roles = ['光影', '纪实', '人像', '商业'];
+      var el = document.getElementById('role');
+      var i = 0;
+      setInterval(function () {
+        i = (i + 1) % roles.length;
+        el.textContent = roles[i];
+        el.style.animation = 'none';
+        void el.offsetWidth;
+        el.style.animation = 'role-fade-in 0.4s ease-out';
+      }, 2000);
+    })();
+
+    // ── Navbar shadow on scroll > 100 ──
+    (function () {
+      var pill = document.getElementById('navPill');
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 100) pill.classList.add('scrolled');
+        else pill.classList.remove('scrolled');
+      }, { passive: true });
+    })();
+
+    // ── whileInView reveals via IntersectionObserver (staggered) ──
+    (function () {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '-80px' });
+      var reveals = document.querySelectorAll('.reveal');
+      // Add staggered index for transition-delay
+      reveals.forEach(function (el, i) {
+        el.style.setProperty('--i', i);
+        io.observe(el);
+      });
+    })();
+
+    // ── Explorations parallax ──
+    (function () {
+      var explore = document.querySelector('.explore');
+      var cards = document.querySelectorAll('.parallax-cols .pcard');
+      function onScroll() {
+        if (!explore) return;
+        var rect = explore.getBoundingClientRect();
+        var total = rect.height - window.innerHeight;
+        var prog = Math.min(Math.max(-rect.top / total, 0), 1);
+        cards.forEach(function (c, idx) {
+          var col = c.closest('.pcol');
+          var dir = (col && col.matches(':nth-child(2)')) ? 1 : -1;
+          var speed = 120 + (idx % 3) * 60;
+          var base = c.getAttribute('data-rot') || '0';
+          c.style.transform = 'translateY(' + (prog * speed * dir) + 'px) rotate(' + base + 'deg)';
+        });
+      }
+      cards.forEach(function (c) {
+        var m = (c.getAttribute('style') || '').match(/rotate\(([-\d.]+)deg\)/);
+        c.setAttribute('data-rot', m ? m[1] : '0');
+      });
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // ── Lightbox on exploration card click ──
+    (function () {
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lightboxImg');
+      document.querySelectorAll('.pcard').forEach(function (c) {
+        c.addEventListener('click', function () {
+          var img = c.querySelector('img');
+          if (img) { lbImg.src = img.src; lb.classList.add('open'); }
+        });
+      });
+      var lbClose = document.getElementById('lightboxClose');
+      function closeLb() { lb.classList.remove('open'); }
+      lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+      if (lbClose) lbClose.addEventListener('click', closeLb);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
+    })();
+
+    // ── Active nav link on hash click ──
+    (function () {
+      document.querySelectorAll('.nav-link').forEach(function (l) {
+        l.addEventListener('click', function () {
+          document.querySelectorAll('.nav-link').forEach(function (x) { x.classList.remove('active'); });
+          l.classList.add('active');
+        });
+      });
+    })();
+
+    // ── Image error fallback: hide broken photo gracefully ──
+    (function () {
+      var photo = document.getElementById('heroBg');
+      var avatar = document.getElementById('heroAvatarImg');
+      var navImg = document.getElementById('navAvatarImg');
+      function hide(el) { if (el) el.style.display = 'none'; }
+      if (photo) photo.addEventListener('error', function () { hide(photo); });
+      if (avatar) avatar.addEventListener('error', function () { avatar.alt = '王雪磊'; });
+      if (navImg) navImg.addEventListener('error', function () { hide(navImg); });
+    })();
+
+    // ── Gallery: dynamic per-category overlay ──
+    (function () {
+      var gallery = document.getElementById('gallery');
+      var backdrop = document.getElementById('galleryBackdrop');
+      var backBtn = document.getElementById('galleryClose');
+      var articleView = document.getElementById('articleView');
+      var curCat = '';
+      var curView = 'grid';
+      var grid = document.getElementById('galleryGrid');
+      var titleEl = document.getElementById('galleryTitle');
+
+      // Category color palette
+      var catColors = {
+        '光影律动': { h: 42, sBase: 18 },
+        '城市几何': { h: 210, sBase: 10 },
+        '人像叙事': { h: 340, sBase: 12 },
+        '商业静物': { h: 165, sBase: 14 }
+      };
+
+      // Category data — 12 items each (user can replace with real uploads later)
+      var catData = {
+        '光影律动': {
+          eng: 'Light & Shadow',
+          items: [
+            { label: '晨景', sub: 'Morning Scene', src: '15f21cad34ae00b60d4699dedb8959f1.jpg' },
+            { label: '山峦', sub: 'Mountain', src: '385aeb0635dcddfd86cc832d429e7e81.jpg' },
+            { label: '暮色', sub: 'Twilight', src: 'b02b1021e86f2f37eff6739e97f44b2a.jpg' },
+            { label: '湖光', sub: 'Lake Light', src: 'ce4b2d71bf2d843bfd6491d6eea4aad1.jpg' },
+            { label: '夕照', sub: 'Sunset Glow', src: 'f527970d510c348699de8a6d84efc5b6.jpg' }
+          ]
+        },
+        '城市几何': {
+          eng: 'Urban Geometry',
+          items: [
+            { label: '都市一', sub: 'City 1', src: 'ChatGPT Image 2026年6月17日 20_43_06 (1).png' },
+            { label: '都市二', sub: 'City 2', src: 'ChatGPT Image 2026年6月17日 20_43_06 (2).png' },
+            { label: '都市三', sub: 'City 3', src: 'ChatGPT Image 2026年6月17日 20_43_06 (3).png' },
+            { label: '都市四', sub: 'City 4', src: 'ChatGPT Image 2026年6月17日 20_43_06 (4).png' },
+            { label: '都市五', sub: 'City 5', src: 'ChatGPT Image 2026年6月17日 20_43_06 (5).png' },
+            { label: '都市六', sub: 'City 6', src: 'ChatGPT Image 2026年6月17日 20_43_06 (6).png' },
+            { label: '都市七', sub: 'City 7', src: 'ChatGPT Image 2026年6月17日 20_43_06 (7).png' },
+            { label: '都市八', sub: 'City 8', src: 'ChatGPT Image 2026年6月17日 20_43_06 (8).png' },
+            { label: '都市九', sub: 'City 9', src: 'ChatGPT Image 2026年6月17日 20_43_06 (9).png' },
+            { label: '都市十', sub: 'City 10', src: 'ChatGPT Image 2026年6月17日 20_43_06 (10).png' }
+          ]
+        },
+        '人像叙事': {
+          eng: 'Portrait Narrative',
+          items: [
+            { label: '肖像一', sub: 'Portrait 1', src: '08a814661c1858a5a697668b4366c558.jpg' },
+            { label: '肖像二', sub: 'Portrait 2', src: '48dec85f3cd4adfad8135def18d88d6c.jpg' },
+            { label: '肖像三', sub: 'Portrait 3', src: '678bbcb82ef71f267352c2eea32c1986.jpg' },
+            { label: '肖像四', sub: 'Portrait 4', src: '6a62c9d5401c5814ab11fedf52734c64.jpg' },
+            { label: '肖像五', sub: 'Portrait 5', src: '851f18cc537a58588ce86c6f65be4c20.jpg' },
+            { label: '肖像六', sub: 'Portrait 6', src: 'de2cdbee27934b33c12b7b52bca049a6.jpg' },
+            { label: '肖像七', sub: 'Portrait 7', src: 'e57a779b46e5a7117f5b4d4095150004.jpg' }
+          ]
+        },
+        '商业静物': {
+          eng: 'Commercial Still Life',
+          items: [
+            { label: '生灵一', sub: 'Creature 1', src: '0099cfbcb46e184feca29803843cd7e4.jpg' },
+            { label: '生灵二', sub: 'Creature 2', src: '25af5ae31735cbfb0eaf987f83de8862.jpg' },
+            { label: '生灵三', sub: 'Creature 3', src: '4fdf286c66b936d5ecc4939c85d4708a.jpg' },
+            { label: '生灵四', sub: 'Creature 4', src: '899b00e2c62eb51362c9980794b59365.jpg' },
+            { label: '生灵五', sub: 'Creature 5', src: '8b4209e8b231360c413bbda4cc71cb80.jpg' },
+            { label: '生灵六', sub: 'Creature 6', src: '8e23d2d19489b8af698031c76b931362.jpg' },
+            { label: '生灵七', sub: 'Creature 7', src: '99826d3cb692054f69d2efb5b4d577f8.jpg' },
+            { label: '生灵八', sub: 'Creature 8', src: 'b6eb12aa4818023d08bc823a2705cc6f.jpg' },
+            { label: '生灵九', sub: 'Creature 9', src: 'f86e16c2c38af366672e73e0c8522feb.jpg' }
+          ]
+        }
+      };
+
+      // ── Journal article data (for 镜头背后的故事 entries) ──
+      var journalArticles = {
+        'j1': {
+          title: '在西藏拍摄星空：一次与银河的对话',
+          date: '2026 年 3 月 · 8 分钟阅读',
+          body: '西藏的夜空，是我见过最纯净的黑暗。没有城市的光污染，银河像一条发光的河流横跨天际，星辰密集得仿佛触手可及。\n\n拍摄星空需要极大的耐心。凌晨三点，气温降至零下十度，我独自站在海拔四千五百米的山脊上，三脚架在冻土上稳稳扎根。快门线握在手里已经冻得发僵，但我等待的那个时刻还没有到来。\n\n银河核心在凌晨四点半升到最佳位置。我调整好参数——ISO 3200，光圈 f/2.8，快门 25 秒——然后按下快门。在漫长的曝光过程中，我屏住呼吸，仿佛连心跳都会震动三脚架。\n\n当预览画面出现在屏幕上时，所有的寒冷和疲惫都烟消云散了。银河的细节如此丰富，数不清的恒星在画面中闪烁，甚至能看到淡淡的绿色气辉在地平线上浮动。\n\n那一刻我意识到，摄影不只是记录，更是一种与宇宙对话的方式。在这片星空下，我感受到了自己的渺小，也感受到了生命的无限可能。'
+        },
+        'j2': {
+          title: '纪实摄影的力量：捕捉真实的城市脉搏',
+          date: '2026 年 2 月 · 6 分钟阅读',
+          body: '城市是一座永不停歇的舞台。每一天，无数故事在街头巷尾上演——匆忙的上班族、街角卖花的老太太、追逐嬉戏的孩童、相依偎的情侣。作为纪实摄影师，我的工作就是捕捉这些真实的瞬间。\n\n纪实摄影最吸引我的地方在于它的不可预测性。你永远不知道下一个转角会遇到什么。有时候，最好的照片就出现在你最不经意的时候——一个转身、一束光线、一个表情，所有的元素在那一刻完美地结合在一起。\n\n我常常想起在南京西路拍到的那张照片：雨后黄昏，地面的积水映照着霓虹灯的倒影，一个撑伞的女人匆匆走过，她的身影在镜面般的地面上拉出一道优雅的弧线。这张照片没有经过任何刻意安排，却比任何精心策划的构图都更有力量。\n\n这就是纪实摄影的核心——真实性。它不是制造画面，而是发现画面。在这个人人都能拍照的时代，真正的纪实摄影师需要的不是昂贵的器材，而是敏锐的观察力和对生活的热爱。\n\n每一座城市都有它独特的心跳声，而我的相机，就是听诊器。'
+        },
+        'j3': {
+          title: '如何用自然光打造电影感人像',
+          date: '2026 年 1 月 · 5 分钟阅读',
+          body: '自然光是最好的灯光师。在我多年的拍摄经验中，最令人惊艳的人像作品往往不是靠昂贵的影室灯完成的，而是巧妙地利用了自然环境中的光线。\n\n黄金时刻——日出后和日落前一小时——是拍摄人像的黄金时间。这时的光线角度低、色温暖黄，能够在人物面部形成柔和而富有层次感的过渡。我通常会让人物面向光源，让光线从侧面 45 度角照射过来，这样既能勾勒出面部轮廓，又不会让光线过于生硬。\n\n除了黄金时刻，阴天也是拍摄人像的好时机。云层就像一块巨大的柔光箱，将光线均匀地散射开来，在人物面部形成几乎没有阴影的柔和效果。这种光线特别适合拍摄女性肖像和情绪人像。\n\n窗光是我在室内拍摄时最常用的光源。让模特站在窗户旁边，光线从一侧照过来，会在面部形成自然的明暗过渡，另一侧的阴影则增添了画面的立体感和神秘感。一块白色的反光板放在阴影侧，就可以轻松控制阴影的浓淡。\n\n记住，好的光线就在我们身边，关键是要学会观察和利用。当你掌握了光线的语言，任何地方都可以成为你的摄影棚。'
+        },
+        'j4': {
+          title: '从胶片到数码：我的摄影之路',
+          date: '2025 年 12 月 · 10 分钟阅读',
+          body: '我的摄影生涯始于一台父亲的老式胶片相机。那是一台海鸥 4B 双反相机，现在已经很难在市场上找到了。我还记得第一次透过取景器看到倒立影像时的惊奇感，那种将三维世界压缩到一张小小底片上的魔法，至今仍然让我着迷。\n\n胶片时代，每一次按下快门都是一次谨慎的决策。一卷胶卷只有 36 张，每一张都有成本。这迫使你在按下快门前必须认真思考——构图、曝光、对焦，每一个环节都不能马虎。这种约束培养了我严谨的拍摄习惯，也让我学会了等待最佳时机。\n\n2015 年，我买下了第一台数码单反相机。从胶片到数码的转变，一开始让我很不适应。没有了胶卷成本的限制，我反而不知道该如何取舍了。但很快我就发现，数码摄影的真正优势不在于"可以随意拍摄"，而在于即时反馈——你可以立刻看到拍摄结果，调整参数，再试一次。这种学习效率是胶片时代无法比拟的。\n\n如今，我同时使用胶片和数码进行创作。胶片用于那些需要慢下来、仔细品味的项目；数码则用于需要快速响应和大量拍摄的商业工作。两者各有优势，互不矛盾。\n\n摄影之路走到今天，我最大的感悟是：器材永远不会是限制，真正决定一张照片好坏的，是你按下快门时的心。'
+        }
+      };
+
+      // Populate article view (works for both category keys and journal keys)
+      function showArticle(key) {
+        var data = catArticles[key] || journalArticles[key];
+        if (!data) return;
+        var imgs = window.__PC_IMGS__ || {};
+        var imgSrc = data.img || imgs[key] || placeholder(key, 0);
+        articleView.innerHTML =
+          '<div class="a-headline">' + data.title + '</div>' +
+          '<div class="a-meta"><span>' + data.date + '</span></div>' +
+          '<img class="a-image" src="' + imgSrc + '" alt="' + data.title + '">' +
+          '<div class="a-body">' +
+            data.body.split('\n').filter(Boolean).map(function (p) { return '<p>' + p + '</p>'; }).join('') +
+          '</div>';
+      }
+
+      // ── Article data (placeholder — user writes real news later) ──
+      var catArticles = {
+        '光影律动': {
+          date: '2026 年 6 月',
+          summary: '光与影的变幻，是我镜头下永恒的主题。从晨光到暮色，每一道光都有它独特的叙事方式。',
+          body: '摄影的本质是光的艺术。当我透过取景器观察世界时，最先打动我的永远是光的方向、质地和温度。\n\n清晨的第一缕阳光穿过窗帘的缝隙，在房间里投下温柔的光束；正午时分，强烈的日光在建筑立面上切割出锋利的几何图形；黄昏时分，金色的余晖为一切都蒙上一层温暖的薄纱。\n\n这一系列作品记录了我在不同时间、不同地点与光的对话。每一张照片都是对光线的一次解读——我想捕捉的不是物体本身，而是物体被照亮的那一刻。'
+        },
+        '城市几何': {
+          title: '城市几何：钢筋水泥中的秩序之美',
+          date: '2026 年 6 月',
+          summary: '城市是一座巨大的几何博物馆。建筑线条、街道网格、玻璃幕墙的反射，处处隐藏着数学般精确的美感。',
+          body: '我常常在城市中漫无目的地行走，寻找那些被忽视的几何之美。高楼的轮廓切割着天空，立交桥的弧线在空中交错，玻璃幕墙反射出另一个平行世界。\n\n对称与重复、节奏与韵律——这些原本属于音乐的词汇，在城市建筑中得到了完美的视觉呈现。每一座建筑都是一个巨大的雕塑，而摄影师的工作就是找到最佳的观看角度。\n\n在这组作品中，我试图剥离城市的喧嚣与杂乱，只留下最纯粹的线条和形状，让观众看到钢筋水泥背后隐藏的秩序与和谐。'
+        },
+        '人像叙事': {
+          title: '人像叙事：每一张脸都是一个故事',
+          date: '2026 年 6 月',
+          summary: '在我的镜头前，每个人都是一个独特的故事。眼神、表情、姿态——细节中藏着最真实的情感。',
+          body: '人像摄影对我来说，从来不只是按下快门那么简单。每一次拍摄都是一次短暂的相遇，一次心灵的对话。\n\n我喜欢捕捉那些不经意的瞬间——一个沉思的眼神、一抹若有若无的微笑、或者是在光影交错中侧脸的轮廓。这些瞬间往往比刻意摆拍的姿势更能传达真实的情感。\n\n光线在人物面部的流动，能够塑造出截然不同的情绪和氛围。柔和的散射光带来温柔与宁静，而强烈的侧光则能勾勒出戏剧性的轮廓与质感。'
+        },
+        '商业静物': {
+          title: '商业静物：让物品讲述自己的故事',
+          date: '2026 年 6 月',
+          summary: '每一件物品都有它独特的美感和质感。商业摄影的任务，就是用镜头去发现并放大这种美。',
+          body: '商业摄影是一场关于细节的修行。一个瓷器表面的釉色光泽、一块织物的纹理质感、一杯饮品中气泡的升腾——这些微小的细节，在镜头下被放大成令人惊叹的视觉盛宴。\n\n布光是商业静物摄影中最关键的环节。每一盏灯的位置、每一个反光板的角度，都会对最终的效果产生决定性的影响。我追求的是那种既有商业片的精致品质，又不失艺术感的表现方式。\n\n这组作品展示了我对不同材质的理解与诠释——从玻璃的通透到金属的冷冽，从织物的柔软到瓷器的温润，每一种材质都需要不同的光影处理方式。'
+        }
+      };
+
+
+
+      // Generate placeholder SVG data URI
+      function placeholder(cat, i) {
+        var c = catColors[cat] || { h: 0, sBase: 10 };
+        var v1 = 82 + (i % 4) * 6;
+        var v2 = v1 - 10;
+        var s = c.sBase + (i % 5) * 3;
+        return 'data:image/svg+xml,' + encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450">' +
+          '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+          '<stop offset="0" stop-color="hsl(' + c.h + ',' + s + '%,' + v1 + '%)"/>' +
+          '<stop offset="1" stop-color="hsl(' + c.h + ',' + (s + 5) + '%,' + v2 + '%)"/>' +
+          '</linearGradient></defs>' +
+          '<rect width="600" height="450" fill="url(#g)"/>' +
+          '</svg>'
+        );
+      }
+
+      // Open lightbox
+      function openLightbox(src) {
+        if (!src) return;
+        var lb = document.getElementById('lightbox');
+        var lbImg = document.getElementById('lightboxImg');
+        lbImg.src = src;
+        lb.classList.add('open');
+      }
+
+      // Switch view (grid / article)
+      function switchView(view) {
+        curView = view;
+        document.querySelectorAll('.gallery-tab').forEach(function (t) {
+          t.classList.toggle('active', t.getAttribute('data-view') === view);
+        });
+        if (view === 'grid') {
+          grid.style.display = '';
+          articleView.classList.remove('show');
+          showGrid(curCat);
+        } else {
+          grid.style.display = 'none';
+          articleView.classList.add('show');
+          showArticle(curCat);
+        }
+      }
+
+      // Populate gallery grid
+      function showGrid(catKey) {
+        var data = catData[catKey];
+        if (!data) return;
+        grid.innerHTML = '';
+        data.items.forEach(function (item, i) {
+          var div = document.createElement('div');
+          div.className = 'gallery-item';
+          div.tabIndex = 0;
+          div.setAttribute('role', 'button');
+          div.setAttribute('aria-label', '查看 ' + item.label);
+
+          var img = document.createElement('img');
+          img.alt = item.label;
+          img.src = item.src || placeholder(catKey, i);
+          img.loading = 'lazy';
+
+          var cap = document.createElement('div');
+          cap.className = 'caption';
+          cap.innerHTML = item.label + '<span>' + item.sub + '</span>';
+
+          div.appendChild(img);
+          div.appendChild(cap);
+
+          // Click → lightbox
+          div.addEventListener('click', function () { openLightbox(img.src); });
+          div.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(img.src); }
+          });
+
+          // Image error fallback — gentle fade instead of text
+          img.addEventListener('error', function () {
+            img.style.opacity = '0.15';
+            img.style.background = 'var(--surface)';
+            img.setAttribute('data-error', '1');
+          });
+
+          grid.appendChild(div);
+        });
+      }
+
+      // Open gallery with category, default to grid view
+      function openGallery(catKey) {
+        curCat = catKey;
+        titleEl.textContent = catKey;
+        // Reset to grid tab
+        curView = 'grid';
+        document.querySelectorAll('.gallery-tab').forEach(function (t) {
+          t.classList.toggle('active', t.getAttribute('data-view') === 'grid');
+        });
+        grid.style.display = '';
+        articleView.classList.remove('show');
+        showGrid(catKey);
+        gallery.classList.add('open');
+        if (backdrop) backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        gallery.focus();
+      }
+
+      function closeGallery() {
+        gallery.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      // Wire: each project card → its category gallery
+      document.querySelectorAll('.proj').forEach(function (card) {
+        card.addEventListener('click', function () {
+          var txt = card.querySelector('.proj-label .txt');
+          if (!txt) return;
+          openGallery(txt.textContent.trim());
+        });
+      });
+
+      // Wire: tab buttons
+      document.querySelectorAll('.gallery-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var view = tab.getAttribute('data-view');
+          if (view !== curView) switchView(view);
+        });
+      });
+
+      // Wire: journal entry → article view
+      document.querySelectorAll('.entry').forEach(function (entry) {
+        entry.addEventListener('click', function () {
+          var imgEl = entry.querySelector('img[data-img]');
+          if (!imgEl) return;
+          var key = imgEl.getAttribute('data-img');
+          var data = journalArticles[key];
+          if (!data) return;
+          // Open gallery overlay in article mode
+          curCat = '镜头背后的故事';
+          titleEl.textContent = curCat;
+          curView = 'article';
+          document.querySelectorAll('.gallery-tab').forEach(function (t) {
+            t.classList.toggle('active', t.getAttribute('data-view') === 'article');
+          });
+          grid.style.display = 'none';
+          articleView.classList.add('show');
+          showArticle(key);
+          gallery.classList.add('open');
+          if (backdrop) backdrop.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          gallery.focus();
+        });
+      });
+
+      // ── Cycle project card images through gallery photos ──
+      document.querySelectorAll('.proj').forEach(function (card) {
+        var txt = card.querySelector('.proj-label .txt');
+        var img = card.querySelector('.proj-img img');
+        if (!txt || !img) return;
+        var catKey = txt.textContent.trim();
+        var items = (catData[catKey] || {}).items;
+        if (!items || items.length < 2) return;
+        var idx = 0;
+        img.src = items[0].src || placeholder(catKey, 0);
+        // Random offset so cards don't cycle in sync
+        var startDelay = Math.floor(Math.random() * 3500);
+        setTimeout(function () {
+          setInterval(function () {
+            // Zoom-out crossfade
+            img.style.opacity = '0';
+            img.style.transform = 'scale(1.08)';
+            setTimeout(function () {
+              idx = (idx + 1) % items.length;
+              var item = items[idx];
+              img.src = item.src || placeholder(catKey, idx);
+              img.style.opacity = '1';
+              img.style.transform = 'scale(1)';
+            }, 400);
+          }, 3800);
+        }, startDelay);
+      });
+
+      backBtn.addEventListener('click', closeGallery);
+      if (backdrop) backdrop.addEventListener('click', function () {
+        if (waterfall.classList.contains('open')) closeWaterfall();
+        if (gallery.classList.contains('open')) closeGallery();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          if (waterfall.classList.contains('open')) closeWaterfall();
+          else if (gallery.classList.contains('open')) closeGallery();
+        }
+      });
+
+      // ── Cycle journal entry thumbnails through city photos ──
+      (function () {
+        var cityImgs = (catData['城市几何'] || {}).items || [];
+        if (cityImgs.length < 2) return;
+        var entries = document.querySelectorAll('.entry img');
+        entries.forEach(function (img, idx) {
+          var ci = idx % cityImgs.length;
+          img.src = cityImgs[ci].src || placeholder('城市几何', ci);
+          var startDelay = 800 + idx * 1500;
+          setTimeout(function () {
+            setInterval(function () {
+              img.style.opacity = '0';
+              img.style.transform = 'scale(1.08)';
+              setTimeout(function () {
+                ci = (ci + 1) % cityImgs.length;
+                img.src = cityImgs[ci].src || placeholder('城市几何', ci);
+                img.style.opacity = '1';
+                img.style.transform = 'scale(1)';
+              }, 400);
+            }, 3800);
+          }, startDelay);
+        });
+      })();
+
+      // ── Waterfall gallery (all photos, zero-gap masonry) ──
+      var waterfall = document.getElementById('waterfall');
+      var wfBack = document.getElementById('wfBack');
+      var wfGrid = document.getElementById('wfGrid');
+
+      function openWaterfall() {
+        wfGrid.innerHTML = '';
+        var all = [];
+        Object.keys(catData).forEach(function (catKey) {
+          (catData[catKey].items || []).forEach(function (item, i) {
+            all.push({
+              src: item.src || placeholder(catKey, i),
+              alt: item.label,
+              cat: catKey
+            });
+          });
+        });
+        // Shuffle for visual variety
+        for (var s = all.length - 1; s > 0; s--) {
+          var j = Math.floor(Math.random() * (s + 1));
+          var tmp = all[s]; all[s] = all[j]; all[j] = tmp;
+        }
+        all.forEach(function (photo) {
+          var div = document.createElement('div');
+          div.className = 'wf-item';
+          var img = document.createElement('img');
+          img.src = photo.src;
+          img.alt = photo.alt;
+          img.loading = 'lazy';
+          // Varied heights for natural waterfall rhythm
+          var ratios = [0.75, 1.0, 1.25, 1.5];
+          var r = ratios[Math.floor(Math.random() * ratios.length)];
+          img.style.height = Math.round(280 * r) + 'px';
+          img.addEventListener('click', function () {
+            openLightbox(img.src);
+          });
+          img.addEventListener('error', function () {
+            img.style.background = 'var(--surface)';
+            img.style.minHeight = '180px';
+          });
+          div.appendChild(img);
+          wfGrid.appendChild(div);
+        });
+
+        waterfall.classList.add('open');
+        if (backdrop) backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        waterfall.focus();
+      }
+
+      function closeWaterfall() {
+        waterfall.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      wfBack.addEventListener('click', closeWaterfall);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && waterfall.classList.contains('open')) closeWaterfall();
+      });
+
+      // Wire: "查看全部 →" button
+      document.querySelectorAll('.view-all').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          openWaterfall();
+        });
+      });
+      // ── Cycle hero background through all gallery photos ──
+      (function () {
+        var heroBg = document.getElementById('heroBg');
+        if (!heroBg) return;
+        var imgs = [];
+        Object.keys(catData).forEach(function (catKey) {
+          (catData[catKey].items || []).forEach(function (item, i) {
+            imgs.push(item.src || placeholder(catKey, i));
+          });
+        });
+        if (imgs.length < 2) return;
+        var idx = 0;
+        heroBg.src = imgs[0];
+        setInterval(function () {
+          idx = (idx + 1) % imgs.length;
+          heroBg.style.opacity = '0.3';
+          setTimeout(function () {
+            heroBg.src = imgs[idx];
+            heroBg.style.opacity = '0.85';
+          }, 500);
+        }, 4500);
+      })();
+    })();
+  </script>
+  <script>window.__PC_IMGS__ = {"p1":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWY1ZjciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGU4ZWQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjE1MCIgcj0iMTIwIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI1NTAiIGN5PSIzNTAiIHI9IjE4MCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iNjgwIiBjeT0iMTIwIiByPSI2MCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC40Ii8+PC9zdmc+","p2":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iMTA2NyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmJmYmZkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZjBmMGY1Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSIxMDY3IiBmaWxsPSJ1cmwoI2cpIi8+PGxpbmUgeDE9IjAiIHkxPSIzMDAiIHgyPSI4MDAiIHkyPSIzMDAiIHN0cm9rZT0iI2U4ZThlZCIgc3Ryb2tlLXdpZHRoPSIxIi8+PGxpbmUgeDE9IjAiIHkxPSI2MDAiIHgyPSI4MDAiIHkyPSI2MDAiIHN0cm9rZT0iI2U4ZThlZCIgc3Ryb2tlLXdpZHRoPSIxIi8+PGxpbmUgeDE9IjAiIHkxPSI5MDAiIHgyPSI4MDAiIHkyPSI5MDAiIHN0cm9rZT0iI2U4ZThlZCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHJlY3QgeD0iMTAwIiB5PSIxMDAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjZmZmIiByeD0iMTYiIG9wYWNpdHk9IjAuNiIvPjxyZWN0IHg9IjUwMCIgeT0iNDAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2ZmZiIgcng9IjE2IiBvcGFjaXR5PSIwLjYiLz48cmVjdCB4PSIzMDAiIHk9IjcwMCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZmYiIHJ4PSIxNiIgb3BhY2l0eT0iMC42Ii8+PC9zdmc+","p3":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iMTA2NyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmFmYWZhIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZWVlZWYyIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSIxMDY3IiBmaWxsPSJ1cmwoI2cpIi8+PGVsbGlwc2UgY3g9IjQwMCIgY3k9IjQwMCIgcng9IjI1MCIgcnk9IjMwMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC40Ii8+PGVsbGlwc2UgY3g9IjQwMCIgY3k9IjgwMCIgcng9IjIwMCIgcnk9IjE1MCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC4zIi8+PC9zdmc+","p4":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmNWY1ZjciLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjMwMCIgcj0iMTAwIiBmaWxsPSIjZThlOGVkIiBvcGFjaXR5PSIwLjUiLz48cmVjdCB4PSI1MDAiIHk9IjIwMCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxNiIgZmlsbD0iI2YwZjBmNSIgb3BhY2l0eT0iMC42Ii8+PHJlY3QgeD0iNTUwIiB5PSIyNTAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiByeD0iOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC41Ii8+PC9zdmc+","j1":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWY1ZjciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNGU0ZTkiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==","j2":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmYmZiZmQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlYmViZjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==","j3":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmYWZhZmEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGU4ZWQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==","j4":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmMGYwZjUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==","e1":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWY1ZjciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlMGUwZTYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjY0MCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==","e2":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmYmZiZmQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGU4ZWQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjY0MCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==","e3":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmYWZhZmEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNGU0ZWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjY0MCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==","e4":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlZWVlZjIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjY0MCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==","e5":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWY1ZjciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGU4ZWQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjY0MCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==","e6":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmYmZiZmQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlMGUwZTYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjY0MCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg=="};</script>
+  <script>
+    // Re-run image loading after PC_IMGS is defined
+    (function () {
+      var IMGS = window.__PC_IMGS__ || {};
+      document.querySelectorAll('img[data-img]').forEach(function (el) {
+        var key = el.getAttribute('data-img');
+        if (IMGS[key]) el.src = IMGS[key];
+      });
+    })();
+  </script>
+
+
+</body></html>

@@ -1,0 +1,285 @@
+{
+  "schema": "open-design.design-manifest.v1",
+  "title": "765b6e21-4ee2-4cdf-88c9-23b03f503782",
+  "entryFile": "index.html",
+  "sourceFiles": {
+    "all": [
+      "${APPDATA}/npm/claude",
+      "${APPDATA}/npm/claude.cmd",
+      "${APPDATA}/npm/claude.ps1",
+      "0099cfbcb46e184feca29803843cd7e4.jpg",
+      "08a814661c1858a5a697668b4366c558.jpg",
+      "15f21cad34ae00b60d4699dedb8959f1.jpg",
+      "25af5ae31735cbfb0eaf987f83de8862.jpg",
+      "385aeb0635dcddfd86cc832d429e7e81.jpg",
+      "48dec85f3cd4adfad8135def18d88d6c.jpg",
+      "4fdf286c66b936d5ecc4939c85d4708a.jpg",
+      "678bbcb82ef71f267352c2eea32c1986.jpg",
+      "6a62c9d5401c5814ab11fedf52734c64.jpg",
+      "851f18cc537a58588ce86c6f65be4c20.jpg",
+      "899b00e2c62eb51362c9980794b59365.jpg",
+      "8b4209e8b231360c413bbda4cc71cb80.jpg",
+      "8e23d2d19489b8af698031c76b931362.jpg",
+      "99826d3cb692054f69d2efb5b4d577f8.jpg",
+      "b02b1021e86f2f37eff6739e97f44b2a.jpg",
+      "b6eb12aa4818023d08bc823a2705cc6f.jpg",
+      "ce4b2d71bf2d843bfd6491d6eea4aad1.jpg",
+      "ChatGPT Image 2026年6月17日 20_43_06 (1).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (10).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (2).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (3).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (4).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (5).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (6).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (7).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (8).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (9).png",
+      "de2cdbee27934b33c12b7b52bca049a6.jpg",
+      "e57a779b46e5a7117f5b4d4095150004.jpg",
+      "f527970d510c348699de8a6d84efc5b6.jpg",
+      "f86e16c2c38af366672e73e0c8522feb.jpg",
+      "index.html",
+      "mqhe7gml-IMG_7096.JPEG",
+      "mqhew9gu-image.png",
+      "mqheyfnr-image.png",
+      "mqhfxpro-drawing-2026-06-17T02-17-23-117Z.png",
+      "mqhfyqo8-drawing-2026-06-17T02-18-10-946Z.png",
+      "mqhfzvq5-drawing-2026-06-17T02-19-04-153Z.png",
+      "mqhgjlbh-drawing-2026-06-17T02-34-23-784Z.png",
+      "mqhgn7ts-drawing-2026-06-17T02-37-12-923Z.png",
+      "mqhgo4n0-drawing-2026-06-17T02-37-55-448Z.png",
+      "mqhgp37v-drawing-2026-06-17T02-38-40-263Z.png",
+      "mqhgq5il-drawing-2026-06-17T02-39-29-896Z.png",
+      "mqhgrnme-drawing-2026-06-17T02-40-40-016Z.png",
+      "mqhhbzdk-image.png",
+      "mqhij78n-drawing-2026-06-17T03-30-04-769Z.png",
+      "mqhj70xh-drawing-2026-06-17T03-48-36-336Z.png",
+      "mqhqwyil-drawing-2026-06-17T07-24-43-570Z.png",
+      "mqhr4opi-image.png",
+      "mqht24vn-drawing-2026-06-17T08-24-44-328Z.png",
+      "mqhuxfo0-image.png",
+      "mqiz1r07-image.png",
+      "mqj1gbnv-drawing-2026-06-18T05-07-29-408Z.png",
+      "mqjf9vhi-0054879da6e9dfb0b76b703cf6834954.jpg",
+      "mqjftwt6-drawing-2026-06-18T11-49-57-968Z.png",
+      "mqjg1rt0-image.png"
+    ],
+    "html": [
+      "index.html"
+    ],
+    "css": [],
+    "scriptsAndComponents": [],
+    "assets": [
+      "${APPDATA}/npm/claude",
+      "${APPDATA}/npm/claude.cmd",
+      "${APPDATA}/npm/claude.ps1",
+      "0099cfbcb46e184feca29803843cd7e4.jpg",
+      "08a814661c1858a5a697668b4366c558.jpg",
+      "15f21cad34ae00b60d4699dedb8959f1.jpg",
+      "25af5ae31735cbfb0eaf987f83de8862.jpg",
+      "385aeb0635dcddfd86cc832d429e7e81.jpg",
+      "48dec85f3cd4adfad8135def18d88d6c.jpg",
+      "4fdf286c66b936d5ecc4939c85d4708a.jpg",
+      "678bbcb82ef71f267352c2eea32c1986.jpg",
+      "6a62c9d5401c5814ab11fedf52734c64.jpg",
+      "851f18cc537a58588ce86c6f65be4c20.jpg",
+      "899b00e2c62eb51362c9980794b59365.jpg",
+      "8b4209e8b231360c413bbda4cc71cb80.jpg",
+      "8e23d2d19489b8af698031c76b931362.jpg",
+      "99826d3cb692054f69d2efb5b4d577f8.jpg",
+      "b02b1021e86f2f37eff6739e97f44b2a.jpg",
+      "b6eb12aa4818023d08bc823a2705cc6f.jpg",
+      "ce4b2d71bf2d843bfd6491d6eea4aad1.jpg",
+      "ChatGPT Image 2026年6月17日 20_43_06 (1).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (10).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (2).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (3).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (4).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (5).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (6).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (7).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (8).png",
+      "ChatGPT Image 2026年6月17日 20_43_06 (9).png",
+      "de2cdbee27934b33c12b7b52bca049a6.jpg",
+      "e57a779b46e5a7117f5b4d4095150004.jpg",
+      "f527970d510c348699de8a6d84efc5b6.jpg",
+      "f86e16c2c38af366672e73e0c8522feb.jpg",
+      "mqhe7gml-IMG_7096.JPEG",
+      "mqhew9gu-image.png",
+      "mqheyfnr-image.png",
+      "mqhfxpro-drawing-2026-06-17T02-17-23-117Z.png",
+      "mqhfyqo8-drawing-2026-06-17T02-18-10-946Z.png",
+      "mqhfzvq5-drawing-2026-06-17T02-19-04-153Z.png",
+      "mqhgjlbh-drawing-2026-06-17T02-34-23-784Z.png",
+      "mqhgn7ts-drawing-2026-06-17T02-37-12-923Z.png",
+      "mqhgo4n0-drawing-2026-06-17T02-37-55-448Z.png",
+      "mqhgp37v-drawing-2026-06-17T02-38-40-263Z.png",
+      "mqhgq5il-drawing-2026-06-17T02-39-29-896Z.png",
+      "mqhgrnme-drawing-2026-06-17T02-40-40-016Z.png",
+      "mqhhbzdk-image.png",
+      "mqhij78n-drawing-2026-06-17T03-30-04-769Z.png",
+      "mqhj70xh-drawing-2026-06-17T03-48-36-336Z.png",
+      "mqhqwyil-drawing-2026-06-17T07-24-43-570Z.png",
+      "mqhr4opi-image.png",
+      "mqht24vn-drawing-2026-06-17T08-24-44-328Z.png",
+      "mqhuxfo0-image.png",
+      "mqiz1r07-image.png",
+      "mqj1gbnv-drawing-2026-06-18T05-07-29-408Z.png",
+      "mqjf9vhi-0054879da6e9dfb0b76b703cf6834954.jpg",
+      "mqjftwt6-drawing-2026-06-18T11-49-57-968Z.png",
+      "mqjg1rt0-image.png"
+    ]
+  },
+  "screens": [
+    {
+      "file": "index.html",
+      "role": "screen",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    }
+  ],
+  "screenFilePolicy": {
+    "mode": "screen-file-first",
+    "entryFileRole": "primary-screen",
+    "rules": [
+      "Each distinct user-facing screen or surface must be delivered and implemented as its own file/route.",
+      "If a landing page is present or requested, keep it in landing.html and do not merge it into the product app screen.",
+      "When multiple HTML screens exist, index.html is a launcher/overview only; it must not be treated as the combined final UI.",
+      "Keep product app screens, landing pages, platform screens, and OS widget surfaces separate in production code."
+    ]
+  },
+  "appModules": [
+    "Identify domain-specific in-app modules from the exported UI; do not reduce them to generic cards.",
+    "For each major module, implement purpose, default/loading/empty/error/success states, and responsive behavior.",
+    "Keep app modules separate from OS home-screen widgets in the production component model."
+  ],
+  "osWidgets": [
+    "If the export includes home-screen, lock-screen, Live Activity, tablet glance, or Android widget surfaces, implement them as platform quick-access surfaces outside the app UI.",
+    "If none are present, do not invent OS widgets unless the product requirements request them."
+  ],
+  "landingPage": {
+    "detection": "Inspect files and screen names for a marketing/landing page surface. If present, keep it separate from product app screens.",
+    "requiredSections": [
+      "hero",
+      "value props",
+      "product proof/screenshots",
+      "feature proof",
+      "CTA"
+    ]
+  },
+  "tokens": {
+    "source": [
+      "index.html"
+    ],
+    "required": [
+      "background",
+      "surface",
+      "foreground",
+      "muted text",
+      "border",
+      "accent",
+      "radius",
+      "shadow",
+      "spacing",
+      "type scale",
+      "motion"
+    ],
+    "note": "Extract/freeze tokens before framework implementation so coding tools do not substitute default theme colors or typography."
+  },
+  "interactions": {
+    "source": [
+      "index.html"
+    ],
+    "requiredStates": [
+      "default",
+      "hover",
+      "focus",
+      "active",
+      "disabled",
+      "loading",
+      "empty",
+      "error",
+      "success"
+    ],
+    "requiredBehaviors": [
+      "forms/validation where present",
+      "tabs/filters where present",
+      "dialogs/sheets/drawers where present",
+      "copy/generate/share actions where present",
+      "player or quick controls where present"
+    ],
+    "note": "If the prototype is static, derive missing behavior from visible controls and document it before coding."
+  },
+  "responsiveViewports": [
+    {
+      "name": "mobile-compact",
+      "width": 360,
+      "height": 800,
+      "category": "mobile",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "mobile-standard",
+      "width": 390,
+      "height": 844,
+      "category": "mobile",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "mobile-large",
+      "width": 430,
+      "height": 932,
+      "category": "mobile",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "foldable-small-tablet",
+      "width": 600,
+      "height": 960,
+      "category": "foldable-tablet",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "tablet-portrait",
+      "width": 820,
+      "height": 1180,
+      "category": "tablet",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "tablet-landscape",
+      "width": 1024,
+      "height": 768,
+      "category": "tablet",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "laptop",
+      "width": 1366,
+      "height": 768,
+      "category": "desktop",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "category": "desktop",
+      "mustAvoidHorizontalScroll": true
+    },
+    {
+      "name": "wide",
+      "width": 1920,
+      "height": 1080,
+      "category": "wide",
+      "mustAvoidHorizontalScroll": true
+    }
+  ],
+  "implementationChecklist": [
+    "Open entryFile first and map screens, modules, tokens, and interactions.",
+    "Extract tokens before writing framework components.",
+    "Implement app-specific modules with real states instead of generic card grids.",
+    "Preserve or rebuild JS interactions for meaningful UX actions.",
+    "Validate screenshots at desktop/tablet/mobile viewports with no horizontal overflow.",
+    "Keep landing pages, in-app modules, and OS widgets as separate implementation surfaces."
+  ]
+}
